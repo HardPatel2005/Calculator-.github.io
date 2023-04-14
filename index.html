@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="hard.js">
+    <title>Simple Calculator</title>
+    <style>
+        
+        
+
+    </style>
+</head>
+<body id="body">
+
+    <div class="main">
+    <div id=ans>
+        <div id="screen">
+            
+        </div>
+        
+        </div>
+        <div id="mode">
+            <span id="span_main">
+                <span id="span_under"></span>
+            </span>
+        </div>
+        <div id="btn">
+        <div id="clear" class="b">C</div>
+        <div id="right_bracket" class="b">(</div>
+        <div id="left_bracket" class="b">)</div>
+        <div id=backspace class="material-icons b">&#xe14a; </div>
+        <div id="seven" class="b">7</div>
+        <div id="eight" class="b">8</div>
+        <div id="nine" class="b">9</div>
+        <div id="multiply" class="b">&#215;</div>
+        <div id="four" class="b">4</div>
+        <div id="five" class="b">5</div>
+        <div id="six" class="b">6</div>
+        <div id="divide" class="b">&#247;</div>
+        <div id="one" class="b">1</div>
+        <div id="two" class="b">2</div>
+        <div id=three class="b">3</div>
+        <div id="subtract" class="b">&#8722;</div>
+        <div id="decimal" class="b">.</div>
+        <div id="zero" class="b">0</div>
+        <div id="add" class="b">+</div>
+        <div id="equal" class="b">=</div>
+    </div>
+    </div>
+    
+    <script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+">
+    
+</script>
+
+    <script>
+    
+    
+    Swal.fire({
+  title: 'Hope,U will like this simple yet wonderful🌌 calculator,And if U really do then Plz upvote and follow me for more😊...',
+  showClass: {
+    popup: 'animate_animated animate_fadeInDown'
+  },
+  hideClass: {
+    popup: 'animate_animated animate_fadeOutUp'
+  }
+})
+
+
+
+
+    
+    
+    
+let mode= document.getElementById("span_main")
+let circle= document.getElementById("span_under")
+let body=document.getElementById ("body")
+let btn=document.getElementById ("btn")
+let screen=document.getElementById ("screen")
+let ans=document.getElementById ("ans")
+let m=document.getElementById ("mode")
+let b=document.getElementsByClassName("b")
+let backspace=document.getElementById("backspace")
+
+let g=true
+
+mode.addEventListener("click",() =>{
+   if(g==true){
+    mode.style.cssText="background:rgb(17, 17, 17); transition:2s;"
+    circle.style.cssText="background:white;transform:translate(0%,0%) scale(0.8); transition:2s;"
+    body.style.cssText="color:black; transition:color 2s;"
+    btn.style.cssText ="background:white; transition:2s; color:black;"
+    ans.style.cssText ="background:white; color:black; transition:2s;"
+    m.style.cssText ="background:white; transition:2s;"
+    g=false
+    }
+    else if(g==false){
+        mode.style.cssText="background:white; transition:2s;"
+    circle.style.cssText="background:rgb(17, 17, 17);transform:translate(100%,0%) scale(0.8); transition:2s;"
+    
+    btn.style.cssText ="background:black; transition:2s; color:white;"
+    ans.style.cssText ="background:black; transition:2s;"
+    m.style.cssText ="background:black; transition:2s;"
+    
+    g=true
+    }
+    
+    
+    
+    
+    
+});
+let string=""
+let replaced=""
+
+ Array.from(b).forEach((e) =>{
+    e.addEventListener("click",(r) =>{
+    
+        
+    
+        if(e.innerHTML=="="){
+       try{
+       if(Number.isInteger(eval(string))){
+        string=eval(string)
+        string=string.toString(10)
+        replaced=string
+            screen.innerHTML =string
+}
+else if(Number.isInteger(eval(string))==false && eval(string).toString(10).length<12){
+    string=eval(string)
+    
+string=string.toString(10)
+    replaced=string
+screen.innerHTML =string
+}
+else{
+
+    string=eval(string).toFixed(6)
+    
+        replaced=string
+            screen.innerHTML =string
+}
+}
+catch(error){
+    screen.innerHTML="Error"
+    
+}
+        }
+        else if(e.innerHTML=="C"){
+            string=""
+            replaced=""
+            screen.innerHTML =string
+        }
+        else if(e.innerHTML=="×"){
+        if(string==""){
+            screen.innerHTML=""
+        }
+        
+        else if(string.slice(string.length-1,string.length)=="-" || string.slice(string.length-1,string.length)=="+" || string.slice(string.length-1,string.length)=="/"){
+        replaced = replaced.slice(0, -1)
+    
+        string=replaced+"*" 
+        replaced+="×"
+         screen.innerHTML=replaced
+        }
+        
+        else{
+        replaced+="×"
+            string+="*"
+            screen.innerHTML =replaced
+
+}
+        }
+        
+        else if(e.innerHTML=="÷"){
+        if(string==""){
+            screen.innerHTML=""
+        }
+        
+        else if(string.slice(string.length-1,string.length)=="-" || string.slice(string.length-1,string.length)=="+" || string.slice(string.length-1,string.length)=="*" || string.slice(string.length-1,string.length)=="/"){
+        replaced = replaced.slice(0, -1)
+        string=replaced+"/" 
+        replaced+="÷"
+        screen.innerHTML=replaced
+        }
+
+else{
+replaced+="÷"
+            string+="/"
+screen.innerHTML =replaced
+}
+        }
+        
+        else if(e==backspace){
+    
+            replaced = replaced.slice(0, -1)
+            
+            string=replaced
+            screen.innerHTML=replaced
+            
+            
+        }
+        else if(e.innerHTML=="+"){
+            if(string.slice(string.length-1,string.length)=="-" || string.slice(string.length-1,string.length)=="*" || string.slice(string.length-1,string.length)=="/"){
+             replaced = replaced.slice(0, -1)
+            replaced+="+"
+        string=replaced
+        screen.innerHTML=replaced
+            }
+            else if(string==""){
+                screen.innerHTML=""
+            }
+            else{
+                replaced=replaced+e.innerHTML
+        string=string+e.innerHTML 
+        screen.innerHTML=replaced
+            }
+        }
+        else if(e.innerHTML=="−"){
+        if(string.slice(string.length-1,string.length)=="+"){
+            replaced = replaced.slice(0, -1)
+            replaced+="−"
+        string+="-"
+        screen.innerHTML=replaced
+        }
+        else{
+            replaced+="−"
+            string+="-"
+            screen.innerHTML=replaced
+}
+        }
+        
+        else{
+        replaced=replaced+e.innerHTML 
+        string=string+e.innerHTML 
+        screen.innerHTML=replaced
+}
+    })
+})
+
+   </script>
+   
+</body>
+</html>
